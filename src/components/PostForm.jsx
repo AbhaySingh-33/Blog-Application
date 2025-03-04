@@ -27,8 +27,8 @@ export default function PostForm({ post }) {
             }
     
             // Truncate content if it exceeds 255 characters
-            if (data.content.length > 255) {
-                data.content = data.content.substring(0, 255);
+            if (data.content.length > 2255) {
+                data.content = data.content.substring(0, 2255);
             }
     
             console.log(data);

@@ -8,7 +8,7 @@ export default function CopyBtn({ generatedContent }) {
         if (typeof content !== 'string') {
             throw new Error('Content must be a valid string');
         }
-        return content.length > 255 ? content.substring(0, 255) : content;
+        return content.length > 2255 ? content.substring(0, 2255) : content;
     }
 
     const copyContent = useCallback(() => {

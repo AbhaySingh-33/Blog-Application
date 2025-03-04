@@ -19,6 +19,7 @@ import AllPosts from "./pages/AllPosts";
 import ProfilePage from './pages/ProfilePage.jsx'
 import ForgetPassword from './pages/ForgetPassword'
 import ResetPassword from './pages/ResetPassword.jsx'
+import VerifyEmail from './pages/VerifyEmail.jsx'
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,14 @@ const router = createBrowserRouter([
             element: (
                 <AuthLayout authentication={false}>
                     <Signup />
+                </AuthLayout>
+            ),
+        },
+        {
+            path: "/verify",
+            element: (
+                <AuthLayout authentication={false}>
+                    <VerifyEmail />
                 </AuthLayout>
             ),
         },

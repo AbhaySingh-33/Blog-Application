@@ -53,6 +53,29 @@ export class AuthService {
         }
     }
 
+    async emailVerification() {
+        try {
+            const response = await this.account.createVerification(`${window.location.origin}/verify`);
+                return response
+            } 
+           
+         catch (error) {
+            throw error;
+        }
+    }
+
+    async updateEmailVerification( userId, secret ) {
+        if (!userId || !secret) {
+            throw new Error("Missing required parameters: 'userId' or 'secret'");
+        }
+        try {
+            return await this.account.updateVerification(userId, secret);
+        } catch (error) {
+            throw error;
+        }
+    }
+    
+
     async login({email, password}) {
         try {
             return await this.account.createEmailPasswordSession(email, password);
@@ -84,14 +107,24 @@ export class AuthService {
         }
       }
 
-    async logout() {
-
+       logout = async () => {
         try {
-            await this.account.deleteSessions();
+            const session = await this.account.get(); // Check if a session exists
+            if (session) {
+                await this.account.deleteSession("current"); // Logout only if session exists
+                console.log("User logged out successfully");
+            }
         } catch (error) {
-            console.log("Appwrite serive :: logout :: error", error);
+            if (error.code === 401) {
+                // Don't show an error, just skip logout
+            } else {
+                console.error("Logout error:", error);
+            }
         }
-    }
+    };
+    
+    
+    
 }
 
 const authService = new AuthService();
