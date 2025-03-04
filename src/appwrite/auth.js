@@ -15,16 +15,14 @@ export class AuthService {
     }
     async sendPasswordReset(email) {
         try {
-            const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:5173";
             return await this.account.createRecovery(
                 email,
-                `${baseUrl}/reset-password`
+                `http://localhost:5173/reset-password` 
             );
         } catch (error) {
             console.error("Error sending password reset:", error.message);
         }
     }
-    
     
    
 
@@ -57,14 +55,14 @@ export class AuthService {
 
     async emailVerification() {
         try {
-            const baseUrl = import.meta.env.VITE_BASE_URL || window.location.origin;
-            const response = await this.account.createVerification(`${baseUrl}/verify`);
-            return response;
-        } catch (error) {
+            const response = await this.account.createVerification(`${window.location.origin}/verify`);
+                return response
+            } 
+           
+         catch (error) {
             throw error;
         }
     }
-    
 
     async updateEmailVerification( userId, secret ) {
         if (!userId || !secret) {
