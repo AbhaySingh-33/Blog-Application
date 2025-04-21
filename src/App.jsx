@@ -6,14 +6,13 @@ import {login, logout} from "./store/authSlice"
 import { Footer, Header } from './components'
 import { Outlet } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
-import bg2 from './assets/bg2.png';
 
 
 
 function App() {
 
   const bgStyle = {
-    backgroundImage: `url(${bg2})`,
+    backgroundImage: `url('/bg2.png')`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
