@@ -17,7 +17,7 @@ function App() {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-
+    minHeight: '100vh',
   };
 
   const [loading, setLoading] = useState(true)
