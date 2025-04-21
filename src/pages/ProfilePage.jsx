@@ -14,6 +14,7 @@ const ProfilePage = () => {
   const [DislikedPosts, setDislikedPosts] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     const getUser = async () => {
@@ -69,8 +70,8 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-  <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md text-center">
+    <div className="flex flex-col items-center justify-center min-h-screen ">
+  <div className="bg-white shadow-lg rounded-lg mt-4 p-6 w-full max-w-md text-center">
     <h1 className="text-2xl font-bold mb-4">Profile</h1>
 
     {user ? (
@@ -94,9 +95,9 @@ const ProfilePage = () => {
     )}
   </div>
 
-  <div className="w-full py-8">
+  <div className="w-full  py-8">
   <Container>
-    <h2 className="text-xl font-bold mb-6 text-center">Liked Posts</h2>
+    <h2 className="text-xl font-bold mb-6 text-center border text-white backdrop-blur-md">Liked Posts</h2>
     <div className="flex flex-wrap">
       {likedPosts.length > 0 ? (
         likedPosts.map((post) => (
@@ -105,13 +106,13 @@ const ProfilePage = () => {
           </div>
         ))
       ) : (
-        <p className="text-center w-full">No liked posts yet.</p>
+        <p className="text-center w-full text-white backdrop-blur-md">No liked posts yet.</p>
       )}
     </div>
   </Container>
 
   <Container>
-    <h2 className="text-xl font-bold mb-6 text-center">Disliked Posts</h2>
+    <h2 className="text-xl font-bold mb-6 text-center border text-white backdrop-blur-md">Disliked Posts</h2>
     <div className="flex flex-wrap">
       {DislikedPosts.length > 0 ? (
         DislikedPosts.map((post) => (
@@ -120,7 +121,7 @@ const ProfilePage = () => {
           </div>
         ))
       ) : (
-        <p className="text-center w-full">No Disliked posts yet.</p>
+        <p className="text-center w-full text-white backdrop-blur-md">No Disliked posts yet.</p>
       )}
     </div>
   </Container>

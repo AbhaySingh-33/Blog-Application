@@ -8,7 +8,17 @@ import { Outlet } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
 
 
+
 function App() {
+
+  const bgStyle = {
+    backgroundImage: `url('/src/assets/bg2.png')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+
+  };
+
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
@@ -17,6 +27,7 @@ function App() {
     .then((userData) => {
       if (userData) {
         dispatch(login({userData}))
+        console.log(userData.$id)
       } else {
         dispatch(logout())
       }
@@ -26,11 +37,13 @@ function App() {
   
   
   return !loading ? (
-    <div className='min-h-screen flex flex-col'>
+    <div className='min-h-screen flex flex-col '>
       <Toaster />
       <Header />
       <main className='flex-grow bg-amber-50'>
+         <div style={bgStyle}>
          <Outlet />
+         </div>
       </main>
       <Footer/>
     </div>

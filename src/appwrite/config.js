@@ -1,5 +1,5 @@
 import conf from '../conf/conf.js';
-import { Client, ID, Databases, Storage, Query } from "appwrite";
+import { Client, ID, Databases, Storage, Query ,Permission, Role} from "appwrite";
 
 export class Service{
     client = new Client();
@@ -154,7 +154,7 @@ export class Service{
             const uploadedFile = await this.bucket.createFile(
                 conf.appwriteBucketId,
                 ID.unique(),
-                file
+                file,
             );
     
             console.log("File uploaded successfully:", uploadedFile);
@@ -183,7 +183,9 @@ export class Service{
             console.error(" Error: Missing fileId for preview");
             return "/default-placeholder.png"; // Use a default image
         }
-        return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
+        console.log(this.bucket.getFilePreview(conf.appwriteBucketId, fileId));
+
+        return this.bucket.getFileDownload(conf.appwriteBucketId, fileId);
     }
     
 }

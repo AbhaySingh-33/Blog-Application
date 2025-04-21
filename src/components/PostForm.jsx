@@ -115,7 +115,11 @@ export default function PostForm({ post }) {
     }, [watch, slugTransform, setValue]);
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+        <div className="py-8 text-black bg-amber-50">
+            <h1 className="text-2xl font-bold text-center mb-4">
+                Create new post
+            </h1>
+        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap mt-10">
             <div className="w-2/3 px-2">
                 <Input
                     label="Title :"
@@ -168,5 +172,7 @@ export default function PostForm({ post }) {
                 </Button>
             </div>
         </form>
+        </div>
+        
     );
 }

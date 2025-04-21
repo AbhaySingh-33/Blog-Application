@@ -53,13 +53,19 @@ function Home() {
   return (
     <>
       {/* Hero Section */}
-      <div className="text-center py-10 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-xl">
+      <div className="text-center py-10  text-white rounded-xl">
         <h1 className="text-4xl font-bold">Welcome to Our Blog</h1>
         <p className="mt-4 text-lg">Read the latest articles</p>
       </div>
 
+      <button className="px-4 py-2 mt-10 bg-blue-400 rounded-lg">
+          categories :
+        </button>
+
       {/* Categories Filter */}
       <div className="flex justify-center gap-4 mt-8">
+
+        
         {categories.map((category) => (
           <button
             key={category}
@@ -94,7 +100,7 @@ function Home() {
         <Container>
           <div className="flex flex-wrap">
             <div className="w-full text-center">
-              {!authStatus && <p className="flex justify-center mt-20">Login to see posts</p>}
+              {!authStatus && <p className="flex justify-center text-white mt-20">Login to see posts</p>}
             </div>
 
             {authStatus && paginatedPosts.length === 0 && (

@@ -4,9 +4,11 @@ import appwriteService from "../appwrite/config";
 import { Button, Container } from "../components";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
+import databaseService from '../appwrite/database';
 
 export default function Post() {
     const [post, setPost] = useState(null);
+    const [author, setAuthor] = useState(null); // State to store author data
     const { slug } = useParams();
     const navigate = useNavigate();
 
@@ -18,11 +20,20 @@ export default function Post() {
 
     useEffect(() => {
         if (slug) {
-            appwriteService.getPost(slug).then((post) => {
-                if (post) setPost(post);
-                else navigate("/");
+            appwriteService.getPost(slug).then(async (post) => {
+                if (post) {
+                    setPost(post);
+                    console.log(post.userid)
+                    // Fetch user data using post.userid
+                    const user = await databaseService.getUserData(post.userid);
+                    setAuthor(user);
+                } else {
+                    navigate("/");
+                }
             });
-        } else navigate("/");
+        } else {
+            navigate("/");
+        }
     }, [slug, navigate]);
 
     const deletePost = () => {
@@ -39,57 +50,61 @@ export default function Post() {
             alert("You must be logged in to like a post.");
             return;
         }
-    
+
         let updatedLikes = [...post.likes];
         let updatedDislikes = [...post.dislikes];
-    
+
         if (hasLiked) {
-            // Remove like
             updatedLikes = updatedLikes.filter((id) => id !== userData.$id);
         } else {
-            // Add like and remove dislike if exists
             updatedLikes.push(userData.$id);
             updatedDislikes = updatedDislikes.filter((id) => id !== userData.$id);
         }
-    
-        const updatedPost = {
-            likes: updatedLikes,
-            dislikes: updatedDislikes,
-        };
+
+        const updatedPost = { likes: updatedLikes, dislikes: updatedDislikes };
         await appwriteService.updatePostLikeDislike(post.$id, updatedPost);
         setPost({ ...post, ...updatedPost });
     };
-    
+
     const handleDislike = async () => {
         if (!userData) {
             alert("You must be logged in to dislike a post.");
             return;
         }
-    
+
         let updatedLikes = [...post.likes];
         let updatedDislikes = [...post.dislikes];
-    
+
         if (hasDisliked) {
-            // Remove dislike
             updatedDislikes = updatedDislikes.filter((id) => id !== userData.$id);
         } else {
-            // Add dislike and remove like if exists
             updatedDislikes.push(userData.$id);
             updatedLikes = updatedLikes.filter((id) => id !== userData.$id);
         }
-    
-        const updatedPost = {
-            likes: updatedLikes,
-            dislikes: updatedDislikes,
-        };
+
+        const updatedPost = { likes: updatedLikes, dislikes: updatedDislikes };
         await appwriteService.updatePostLikeDislike(post.$id, updatedPost);
         setPost({ ...post, ...updatedPost });
     };
 
     return post ? (
-        <div className="py-8">
+        <div className="py-8 text-white">
+            {/* Display Author Profile */}
+            {author && (
+                <div className="text-center mb-4">
+                    <Link to={`/profile/${author.$id}`}>
+                        <img
+                            src={`https://ui-avatars.com/api/?name=${author.name}&background=random`}
+                            alt="Profile"
+                            className="w-24 h-24 rounded-full mx-auto"
+                        />
+                        <h3 className="text-lg font-bold mt-2">{author.name}</h3>
+                    </Link>
+                </div>
+            )}
+
             <Container>
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+                <div className="w-full flex justify-center mb-4 relative  rounded-xl p-2">
                     <img
                         src={appwriteService.getFilePreview(post.featuredimage)}
                         alt={post.title}
@@ -109,10 +124,11 @@ export default function Post() {
                         </div>
                     )}
                 </div>
-                <div className="w-full mb-6">
+
+                <div className="bg-white text-black">
                     <h1 className="text-2xl font-bold">{post.title}</h1>
+                    <div className="browser-css mt-6">{parse(post.content)}</div>
                 </div>
-                <div className="browser-css">{parse(post.content)}</div>
 
                 {/* Like and Dislike Buttons */}
                 <div className="flex items-center space-x-4 mt-4">

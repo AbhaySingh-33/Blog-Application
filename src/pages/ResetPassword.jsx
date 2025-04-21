@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import authService from "../appwrite/auth";
+import toast from 'react-hot-toast';
 
 export default function ResetPassword() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ export default function ResetPassword() {
     }
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      toast.error("Passwords do not match!");
       return;
     }
 
@@ -48,7 +49,7 @@ export default function ResetPassword() {
 
       await authService.recoveryAccount(userId, secret, password);
 
-      alert("Password reset successfully!");
+      toast.success("Password reset sucessfully");
       navigate("/login");
     } catch (error) {
       console.error("Error resetting password:", error);

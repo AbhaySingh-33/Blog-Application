@@ -41,3 +41,11 @@
   color: #888;
 }
 
+body {
+  background-image: url('/src/assets/background.png');
+  background-size: cover;
+  
+  background-repeat: no-repeat;
+  height: 100vh;
+  margin: 0;
+}

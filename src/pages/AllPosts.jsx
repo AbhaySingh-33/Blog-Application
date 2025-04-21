@@ -24,7 +24,10 @@ function AllPosts() {
     }, []);
 
     return (
-        <div className='w-full py-8'>
+        <div className='w-full py-8 '>
+            <h1 className='text-2xl font-bold text-center border mb-4 text-white backdrop-blur-md'>
+                Posts created by me
+            </h1>
             <Container>
                 <div className='flex flex-wrap'>
                     {posts.length > 0 ? (

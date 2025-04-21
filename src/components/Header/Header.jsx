@@ -31,7 +31,7 @@ const Header = () => {
       active: authStatus,
     },
     {
-      name: "All Posts",
+      name: "My Posts",
       slug: "/all-posts",
       active: authStatus,
     },
@@ -43,7 +43,7 @@ const Header = () => {
   ]
 
   return (
-    <header className='py-2 shadow bg-orange-200 sticky top-0'>
+    <header className='py-2 backdrop-blur-md sticky top-0'>
       <Container>
         <nav className='flex'>
           <div className='mr-4'>

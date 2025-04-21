@@ -17,6 +17,7 @@ import Post from "./pages/Post";
 
 import AllPosts from "./pages/AllPosts";
 import ProfilePage from './pages/ProfilePage.jsx'
+import UserProfile from './pages/userProfile.jsx'
 import ForgetPassword from './pages/ForgetPassword'
 import ResetPassword from './pages/ResetPassword.jsx'
 import VerifyEmail from './pages/VerifyEmail.jsx'
@@ -78,6 +79,14 @@ const router = createBrowserRouter([
             element: (
                 <AuthLayout authentication>
                     <ProfilePage />
+                </AuthLayout>
+            ),
+        },
+        {
+            path: "/profile/:userId",
+            element: (
+                <AuthLayout authentication>
+                    <UserProfile />
                 </AuthLayout>
             ),
         },

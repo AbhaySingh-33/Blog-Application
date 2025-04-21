@@ -20,12 +20,12 @@ export default function BlogGenerator() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
+    <div className=" flex flex-col items-center justify-center backdrop-blur-md p-6">
       <div className="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center mb-4">AI Blog Generator</h2>
 
         <textarea
-          className="w-full h-24 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full h-24 p-3 border backdrop-blur-md border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           placeholder="Enter a topic (e.g., 'The Future of AI')"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
@@ -40,7 +40,7 @@ export default function BlogGenerator() {
         </button>
 
         {generatedContent && (
-          <div className="mt-6 p-4 border border-gray-300 bg-gray-50 rounded">
+          <div className="mt-6 p-4 border border-gray-300 backdrop-blur-md rounded">
             <h3 className="text-xl font-semibold mb-2">Generated Blog:</h3>
             <CopyBtn generatedContent={generatedContent} />
             <p className="text-gray-700">{generatedContent}</p>
