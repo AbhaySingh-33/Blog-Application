@@ -17,7 +17,7 @@ import Post from "./pages/Post";
 
 import AllPosts from "./pages/AllPosts";
 import ProfilePage from './pages/ProfilePage.jsx'
-import UserProfile from './pages/userProfile.jsx'
+import UserProfile from './pages/UserProfile.jsx'
 import ForgetPassword from './pages/ForgetPassword'
 import ResetPassword from './pages/ResetPassword.jsx'
 import VerifyEmail from './pages/VerifyEmail.jsx'
